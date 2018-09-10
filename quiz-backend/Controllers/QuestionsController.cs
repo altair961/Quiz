@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace quiz_backend.Controllers
 {
@@ -21,10 +23,24 @@ namespace quiz_backend.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]Models.Question question)
+        public async Task<IActionResult> Post([FromBody]Models.Question question)
         {
             context.Questions.Add(question);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
+            return Ok(question);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody]Models.Question question)
+        {
+            if(id != question.ID)
+                return BadRequest();
+
+            context.Entry(question).State = EntityState.Modified; 
+
+            await context.SaveChangesAsync();
+
+            return Ok(question);
         }
     }
 }
