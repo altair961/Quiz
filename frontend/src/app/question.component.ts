@@ -11,6 +11,10 @@ question = {}
 
     constructor(private api: ApiService) {}
 
+    ngOnInit() {
+        this.api.questionSelected.subscribe(question => this.question = question);
+    }
+
     post(question) {
         this.api.postQuestion(question);
     }
