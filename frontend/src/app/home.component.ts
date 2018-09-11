@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   template: '<question></question><questions></questions>'
 })
 export class HomeComponent {
-  
 }

@@ -6,5 +6,4 @@ import { QuestionComponent } from './question.component'
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent {
-
 }
